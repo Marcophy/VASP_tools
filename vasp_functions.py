@@ -53,7 +53,7 @@ def f_postions_forces(in_filepath, in_total_lines, in_lines_ignored, in_position
 
     """
 
-    fullpath = in_filepath + '/OUTCAR'
+    fullpath = os.path.join(in_filepath, 'OUTCAR')
     # Open de file
     with open(fullpath, 'r') as archivo:
         lines = archivo.readlines()
