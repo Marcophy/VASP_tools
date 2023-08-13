@@ -5,6 +5,9 @@ Set of functions designed to read and extract information from VASP output files
 @Date: 2022-2023
 """
 
+# ---- Libraries ----
+import os
+
 
 def f_total_atoms(in_filepath, in_line_number=7):
     """
@@ -14,25 +17,25 @@ def f_total_atoms(in_filepath, in_line_number=7):
         in_filepath (str): Path of the POSCAR file.
         in_line_number (int): Line number where the number of atoms is in the POSCAR file. (Default: 7)
 
-    Returns: Return the total number of atoms. If this paramente is not found, it returns -1.
+    Returns: Return the total number of atoms. If this paramente is not found, it returns 0.
 
     """
 
-    fullpath = in_filepath + '/POSCAR'
+    fullpath = os.path.join(in_filepath, 'POSCAR')
 
     with open(fullpath, "r") as f:
         lines = f.readlines()
         line = lines[in_line_number - 1]
         numbers = line.split()
 
-        if len(numbers) != 2:
-            return -1  # ERROR: The line 7 does not contain 2 number with blank spaces between them.
-        else:
+        total = 0
+        for item in line.split():
             try:
-                a, b = int(numbers[0]), int(numbers[1])
-                return a + b
+                total += int(item)
             except ValueError:
-                return -1  # ERROR: Line 7 does not contain two numbers separated by blanks.
+                pass
+
+        return total
 
 
 def f_postions_forces(in_filepath, in_total_lines, in_lines_ignored, in_position='last', in_keyword='TOTAL-FORCE'):
@@ -113,4 +116,3 @@ def f_find_string_in_file(in_file_path, in_string):
                 found_lines.append(line.strip())
 
     return found_lines
-
