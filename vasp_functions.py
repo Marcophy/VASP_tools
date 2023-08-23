@@ -9,7 +9,7 @@ Set of functions designed to read and extract information from VASP output files
 import os
 
 
-def f_total_atoms(in_filepath, in_line_number=7):
+def total_atoms(in_filepath, in_line_number=7):
     """
     Read the number of atoms from POSCAR file and return the total of atoms number.
 
@@ -38,7 +38,7 @@ def f_total_atoms(in_filepath, in_line_number=7):
         return total
 
 
-def f_postions_forces(in_filepath, in_total_lines, in_lines_ignored, in_position='last', in_keyword='TOTAL-FORCE'):
+def postions_forces(in_filepath, in_total_lines, in_lines_ignored, in_position='last', in_keyword='TOTAL-FORCE'):
     """
     Return the position and forces of all atoms. This information is extracted from the last or first TOTAL-FORCE report in the OUTCAR file.
 
@@ -96,7 +96,7 @@ def f_postions_forces(in_filepath, in_total_lines, in_lines_ignored, in_position
         return -1  # ERROR: Keyword not found
 
 
-def f_find_string_in_file(in_file_path, in_string):
+def find_string_in_file(in_file_path, in_string):
     """
     This function creates a list with all lines from a text file that contain the <in_string>.
 

@@ -4,7 +4,7 @@
 
 __author__ = 'Marco A. Villena'
 __email__ = 'marcoantonio.villena@kaust.edu.sa'
-__version__ = '1.1'
+__version__ = '1.2'
 
 # ----- Modules -----
 import os
@@ -12,13 +12,31 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-from vasp_functions import f_total_atoms
-from vasp_functions import f_postions_forces
-from vasp_functions import f_find_string_in_file
+import vasp_functions as vf
+import general_funcitions as gf
 
 # ------ Input variables -----
-files_path_ini = os.path.join(os.getcwd(), 'examples', 'ini_state')
-files_path_end = os.path.join(os.getcwd(), 'examples', 'end_state')
+manual = False  # Enable/disable the manual mode of folder selection.
+if manual:
+    print('MANUAL MODE')
+    files_path_ini = os.path.join(os.getcwd(), 'examples', 'ini_state')
+    files_path_end = os.path.join(os.getcwd(), 'examples', 'end_state')
+else:
+    print('AUTOMATIC MODE')
+    key_string = 'state'
+    folder_list = gf.find_folders_with_string(os.path.join(os.getcwd(), 'examples'),  key_string)
+    if len(folder_list) == 2:
+        files_path_ini = os.path.join(os.getcwd(), 'examples', folder_list[0])
+        files_path_end = os.path.join(os.getcwd(), 'examples', folder_list[1])
+
+        print('Initial step folder: ', files_path_ini)
+        print('Final step folder: ', files_path_end, '\n')
+    elif len(folder_list) == 0:
+        print('ERROR: Folders not found!')
+        exit()
+    else:
+        print('WATNING: I could not find only two valid folder. Please, check the data folders')
+        exit()
 
 # ------ Internal variables -----
 marker_size = 150  # Size of the marker of all plots
@@ -26,24 +44,24 @@ vector_length = 50  # Length of the vectors in the vectorial plots
 plot_flag = False  # Enable/disable the plots
 
 # ---------- MAIN ----------
-total_atoms = f_total_atoms(files_path_ini)
+total_atoms = vf.total_atoms(files_path_ini)
 if total_atoms == 0:
     raise ValueError('ERROR: No atoms detected in the POSCAR file.')
 
 
-force_ini = np.array(f_postions_forces(files_path_ini, total_atoms, 1))
-force_end = np.array(f_postions_forces(files_path_end, total_atoms, 1))
+force_ini = np.array(vf.postions_forces(files_path_ini, total_atoms, 1))
+force_end = np.array(vf.postions_forces(files_path_end, total_atoms, 1))
 force_dif = np.sqrt(((force_end[:, 0] - force_ini[:, 0]) ** 2) + ((force_end[:, 1] - force_ini[:, 1]) ** 2) + ((force_end[:, 2] - force_ini[:, 2]) ** 2))
 
-toten_ini = f_find_string_in_file(os.path.join(files_path_ini, 'OUTCAR'), 'free  energy   TOTEN')
+toten_ini = vf.find_string_in_file(os.path.join(files_path_ini, 'OUTCAR'), 'free  energy   TOTEN')
 en_ini = float(toten_ini[-1].split()[4])
-toten_end = f_find_string_in_file(os.path.join(files_path_ini, 'OUTCAR'), 'free  energy   TOTEN')
+toten_end = vf.find_string_in_file(os.path.join(files_path_ini, 'OUTCAR'), 'free  energy   TOTEN')
 en_end = float(toten_end[-1].split()[4])
 
 
 print('Total number of atoms = ', total_atoms)
-print(f_find_string_in_file(os.path.join(files_path_ini, 'OUTCAR'), 'EDIFF =')[0])
-print(f_find_string_in_file(os.path.join(files_path_ini, 'OUTCAR'), 'EDIFFG =')[0])
+print(vf.find_string_in_file(os.path.join(files_path_ini, 'OUTCAR'), 'EDIFF =')[0])
+print(vf.find_string_in_file(os.path.join(files_path_ini, 'OUTCAR'), 'EDIFFG =')[0])
 
 print('\n\t\t\t\t\t\t\t[------------------------ Maximum -------------------------]')
 print('Name\t\tTOTEN (eV)\t\t|Fx|\t\t|Fy|\t\t|Fz|\t\tDisplacement [2nd - 1st]')
