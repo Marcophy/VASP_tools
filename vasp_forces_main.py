@@ -3,7 +3,7 @@
 # @Date: 16/03/2023
 
 __author__ = 'Marco A. Villena'
-__email__ = 'marcoantonio.villena@kaust.edu.sa'
+__email__ = 'mavillenas@proton.me'
 __version__ = '1.2'
 
 # ----- Modules -----
