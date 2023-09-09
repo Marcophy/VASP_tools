@@ -1,7 +1,7 @@
 """
 Set of general purpose functions.
 @Author: Marco A. Villena
-@email: mavillenas@hotmail.com
+@email: mavillenas@proton.me
 @Date: 2022-2023
 """
 
