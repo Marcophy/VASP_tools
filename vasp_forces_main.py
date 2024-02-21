@@ -3,7 +3,7 @@
 # @Date: 16/03/2023
 
 __author__ = 'Marco A. Villena'
-__email__ = 'mavillenas@proton.me'
+__email__ = 'marcoantonio.villena@kaust.edu.sa'
 __version__ = '1.2'
 
 # ----- Modules -----
@@ -17,6 +17,10 @@ import general_funcitions as gf
 
 # ------ Input variables -----
 manual = False  # Enable/disable the manual mode of folder selection.
+plot_flag = False  # Enable/disable the plots
+marker_size = 150  # Size of the marker of all plots
+vector_length = 50  # Length of the vectors in the vectorial plots
+
 if manual:
     print('MANUAL MODE')
     files_path_ini = os.path.join(os.getcwd(), 'examples', 'ini_state')
@@ -37,11 +41,6 @@ else:
     else:
         print('WATNING: I could not find only two valid folder. Please, check the data folders')
         exit()
-
-# ------ Internal variables -----
-marker_size = 150  # Size of the marker of all plots
-vector_length = 50  # Length of the vectors in the vectorial plots
-plot_flag = False  # Enable/disable the plots
 
 # ---------- MAIN ----------
 total_atoms = vf.total_atoms(files_path_ini)
