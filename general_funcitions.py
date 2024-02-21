@@ -1,8 +1,8 @@
 """
 Set of general purpose functions.
 @Author: Marco A. Villena
-@email: mavillenas@proton.me
-@Date: 2022-2023
+@email: marcoantonio.villena@kaust.edu.sa
+@Date: 2022-2024
 """
 
 # ---- Libraries ----
