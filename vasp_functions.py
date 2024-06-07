@@ -1,7 +1,7 @@
 """
 Set of functions designed to read and extract information from VASP output files.
 @Author: Marco A. Villena
-@email: marcoantonio.villena@kaust.edu.sa
+@email: mavillena@ugr.es
 @Date: 2022-2024
 """
 
