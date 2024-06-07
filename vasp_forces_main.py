@@ -1,9 +1,9 @@
 # Read information from VASP files
-# @Author: Marco A. Villena (marcoantonio.villena@kaust.edu.sa)
+# @Author: Marco A. Villena
 # @Date: 16/03/2023
 
 __author__ = 'Marco A. Villena'
-__email__ = 'marcoantonio.villena@kaust.edu.sa'
+__email__ = 'mavillena@ugr.es'
 __version__ = '1.2'
 
 # ----- Modules -----
