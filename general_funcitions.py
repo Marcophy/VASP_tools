@@ -1,7 +1,7 @@
 """
 Set of general purpose functions.
 @Author: Marco A. Villena
-@email: marcoantonio.villena@kaust.edu.sa
+@email: mavillena@ugr.es
 @Date: 2022-2024
 """
 
